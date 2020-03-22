@@ -1,13 +1,14 @@
 import App, { Container } from 'next/app'
 import 'antd/dist/antd.css'
 import Layout from '../components/Layout'
+import MyContext from '../libs/my-context'
 
 
 
 class MyApp extends App {
 
     state = {
-        context: 'value',
+        context: 'context provider',
     }
     
     static async getInitialProps(ctx) {
@@ -24,7 +25,9 @@ class MyApp extends App {
     
         return (
             <Layout>
-                <Component { ...pageProps }/>
+                <MyContext.Provider value={this.state.context}>
+                    <Component { ...pageProps }/>
+                </MyContext.Provider>
             </Layout>
         )
     }

@@ -1,7 +1,9 @@
-import { withRouter } from 'next/router'
 import Head from 'next/head'
-import { Button } from 'antd'
+import { withRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import styled from 'styled-components'
+import { Button } from 'antd'
+import moment from 'moment'
 import './index.css'
 
 
@@ -10,9 +12,9 @@ const Title = styled.h1`
     font-size: 40px;
 `
 
-const A = ({ router, name }) => (
+const A = ({ router, name, time }) => (
 	<div className="container">
-        <Title>Title</Title>
+        <Title>Title {time}</Title>
 		<Button type="primary">A { router.query.id } {name}</Button>
 	</div>
 )
@@ -26,9 +28,9 @@ A.getInitialProps = async ctx => {
         setTimeout(() => {
             resolve({
                 name: 'bella',
-                time: moment.default(Date.now() - 60 * 1000).fromNow(),
+                time: moment.default(Date.now() - 60 * 1000 * 24).fromNow(),
             })
-        }, 1000)
+        }, 100)
     })
     return await promise
 }
