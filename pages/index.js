@@ -1,8 +1,13 @@
 import Link from 'next/link'
 import Router from 'next/router'
+import { connect } from 'react-redux';
 import { Button } from 'antd'
+import getConfig from 'next/config'
 import './index.css'
 
+
+
+const { publicRuntimeConfig } = getConfig()
 
 const events = [
 	'routeChangeStart',
@@ -29,10 +34,20 @@ const Home = () => {
 	return (
 		<div className="container">
 			Github
+			<a href={publicRuntimeConfig.OAUTH_URL}>Go Login</a>
 		</div>
 	)
 }
 	
+const mapState = (state) => {
+	return {
+        loginStatus: state.getIn(["combo", "loginStatus"]),
+	}
+}
+
+const mapDispatch = (dispatch) => ({
+   
+})
 
 
-export default Home
+export default connect(mapState, mapDispatch)(Home)
