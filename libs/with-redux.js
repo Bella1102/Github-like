@@ -1,31 +1,35 @@
 import React from 'react'
-import createSore from '../store/store'
+import store from '../redux/index'
+
+
 
 const isServer = typeof window === 'undefined'
 const __NEXT_REUDX_STORE__ = '__NEXT_REUDX_STORE__'
 
+
 function getOrCreateStore(initialState) {
     if (isServer) {
-        return createSore(initialState)
+        return store(initialState)
     }
-
     if (!window[__NEXT_REUDX_STORE__]) {
-        window[__NEXT_REUDX_STORE__] = createSore(initialState)
+        window[__NEXT_REUDX_STORE__] = store(initialState)
     }
     return window[__NEXT_REUDX_STORE__]
 }
 
+
 export default Comp => {
 
     class WithReduxApp extends React.Component {
+
         constructor(props) {
             super(props)
             this.reduxStore = getOrCreateStore(props.initialReduxState)
         }
+
         render() {
-            // const name = name + '123'
             const { Component, pageProps, ...rest } = this.props
-            // console.log(Component, pageProps)
+
             if (pageProps) {
                 pageProps.test = '123'
             }
@@ -39,9 +43,9 @@ export default Comp => {
                 />
             )
         }
-  }
+    }
 
-    WithReduxApp.getInitialProps = async ctx => {
+    WithReduxApp.getInitialProps = async (ctx) => {
         const reduxStore = getOrCreateStore()
         ctx.reduxStore = reduxStore
 

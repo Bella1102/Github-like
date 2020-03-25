@@ -3,7 +3,7 @@ import { withRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 import { Button } from 'antd'
-import moment from 'moment'
+import { actionCreators } from '../redux/oneStore';
 import './index.css'
 
 
@@ -30,7 +30,7 @@ A.getInitialProps = async ctx => {
                 name: 'bella',
                 time: moment.default(Date.now() - 60 * 1000 * 24).fromNow(),
             })
-        }, 100)
+        }, 1000)
     })
     return await promise
 }

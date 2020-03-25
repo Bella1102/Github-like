@@ -14,5 +14,30 @@ import * as constants from './constants';
 // 	}
 // };
 
+export const logout = () => ({
+	type: constants.LOGOUT,
+	loginStatus: false
+});
+
+export function add(num){
+    return {
+        type: constants.ADD,
+        num,
+    }
+};
+
+function addAsync(num) {
+    return dispatch => {
+        setTimeout(() => { dispatch(add(num)) }, 1000)
+    }
+}
+
+export function rename(name){
+    return {
+        type: constants.UPDATE_USERNAME,
+        name,
+    }
+};
+
 
 

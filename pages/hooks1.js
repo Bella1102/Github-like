@@ -1,6 +1,5 @@
-import React, { Component, useState, useReducer, useEffect, useContext, useRef } from 'react'
+import React, { Component, useState, useReducer, useEffect, useRef } from 'react'
 import { Button } from 'antd'
-import MyContext from '../libs/my-context'
 
 
 class MyCount extends Component {
@@ -42,8 +41,6 @@ function MyCountFunc() {
     const [ count, dispatchCount ] = useReducer(countReducer, 0)
     const [ name, setName ] = useState('bella')
 
-    const context = useContext(MyContext)
-
     // useEffect(() => {
     //     const interval = setInterval(() => {
     //         // setCount(c => c + 1)
@@ -61,7 +58,6 @@ function MyCountFunc() {
         <div>
             <div><input value={name} onChange={(e) => setName(e.target.value) }></input></div>
             <Button type="primary" onClick={() => dispatchCount({ type: 'add' })}>{ count }</Button>
-            <div>{ context }</div>
         </div>
     )
 }

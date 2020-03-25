@@ -3,6 +3,8 @@ import Router from 'next/router'
 import { connect } from 'react-redux';
 import { Button } from 'antd'
 import getConfig from 'next/config'
+import { actionCreators } from '../redux/oneStore';
+import { add, rename } from '../redux/oneStore/actionCreators'
 import './index.css'
 
 
@@ -29,24 +31,38 @@ events.forEach(event => {
 })
 
 
-const Home = () => {
+const Home = (count, username, add, rename) => {
 
 	return (
 		<div className="container">
-			Github
+			<span>Count: {count}</span>
+			<span>UserName: {username}</span>
+			<button onClick={() => add(count)}>do add</button>
+			<input value={username} onChange={e => rename(e.target.value)} />
 			<a href={publicRuntimeConfig.OAUTH_URL}>Go Login</a>
 		</div>
 	)
 }
+
+Home.getInitialProps = async ({reduxStore }) => {
+	reduxStore.dispatch(add(3))
+	return {}
+}
 	
 const mapState = (state) => {
 	return {
-        loginStatus: state.getIn(["combo", "loginStatus"]),
+		count: state.combo.count,
+		username: state.combo.username
 	}
 }
 
 const mapDispatch = (dispatch) => ({
-   
+	add(num) {
+		dispatch(actionCreators.add(num))
+	},
+	rename(name) {
+		dispatch(actionCreators.rename(name))
+	}
 })
 
 

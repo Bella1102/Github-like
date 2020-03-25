@@ -5,7 +5,6 @@ import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Docuemnt {
 
-
     static async getInitialProps(ctx) {
         
         const sheet = new ServerStyleSheet()
@@ -18,10 +17,10 @@ class MyDocument extends Docuemnt {
             return {
                 ...props,
                 styles: (
-                    <>
+                    <div>
                       {props.styles}
                       {sheet.getStyleElement()}
-                    </>
+                    </div>
                 ),
             }
         } finally {

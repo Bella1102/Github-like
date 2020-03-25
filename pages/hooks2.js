@@ -1,7 +1,5 @@
-import React, { useState, useReducer, useEffect, 
-    useContext, useRef, memo, useMemo, useCallback } from 'react'
+import React, { useState, useReducer, useEffect, useRef, memo, useMemo, useCallback } from 'react'
 import { Button } from 'antd'
-import MyContext from '../libs/my-context'
 
 
 function countReducer(state, action) {
@@ -19,8 +17,6 @@ function MyCountFunc() {
 
     const [ count, dispatchCount ] = useReducer(countReducer, 0)
     const [ name, setName ] = useState('bella')
-
-    const context = useContext(MyContext)
 
     // const config = {
     //     text: `count is ${count}`,

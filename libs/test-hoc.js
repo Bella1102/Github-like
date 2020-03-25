@@ -1,10 +1,9 @@
 
+export default (Comp) => {
 
-export default Comp => {
+    function TestHocComp({ Component, pageProps, ...rest }) {
 
-    return function TestHocComp({ Component, pageProps, ...rest }) {
-        // const { Component, pageProps, ...rest } = this.props
-        // console.log(Component, pageProps)
+        console.log(Component, pageProps)
         if (pageProps) {
             pageProps.test = '123'
         }
@@ -18,11 +17,8 @@ export default Comp => {
         )
     }
 
-    // TestHocComp.getInitialProps = Comp.getInitialProps
-    // return TestHocComp
-
+    TestHocComp.getInitialProps = Comp.getInitialProps
+    return TestHocComp
 }
-
-// export default TestHocComp(Comp)
 
 
